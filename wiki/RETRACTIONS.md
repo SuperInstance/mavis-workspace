@@ -19,6 +19,8 @@ wrong and you should not build on it.**
 | "the character channel is broken, swap the alphabet" | **REFUTED BY ME, LATER THE SAME HOUR** | a *neutral* alphabet does nothing — the glyph is a function of **depth alone**. See `wiki/EXPERIMENTS.md` |
 | "the character channel loses identity, so the renderer is wrong" | **ALSO REFUTED** | depth from char + identity from colour = **joint EXACT**. The renderer was correct |
 | "a commit recovered 441 files" | **FALSE** | it contained **one**. `git add` had timed out |
+| "the colour channel carries identity" | **PARTLY FALSE — corrected on real pixels** | `ColorTo8Bit` quantises to R:3 G:3 B:2 = **256 values**. Real game textures land on **4 to 39 distinct bytes** and collide: **0 of 28 texture pairs separate by colour at one depth.** Colour carries *most* identity, not all — it is **itself an irreversible projection**, not the clean one I assumed |
+| "joint recovery from a cell is EXACT" | **CONTRADICTED by real data** | true only for synthetic uniform colours that were too separable for the quantiser to bite. On real textures joint recovery is **PARTIAL**: 24 bits → 13/28, 8 bits + 3×3 context → 9/28 |
 
 ## The four rules that came out of it
 
