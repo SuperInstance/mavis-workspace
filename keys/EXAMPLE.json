@@ -1,0 +1,34 @@
+{
+  "key_form_version": 1,
+  "instance": "mavis-workspace",
+  "born": "2026-10-03T01:42:51+00:00",
+  "repo": null,
+  "head": null,
+  "task": "make the colour half of the ASCII results a measurement",
+  "last_measured": "@=79.7% of uniform-depth cells (real C#)",
+  "its_provenance": null,
+  "beliefs": [],
+  "refuted": [
+    "every projection is lossy | L1 colour-collapse kept 98.9%; named loss is cheap",
+    "the character channel is broken, swap the alphabet | a NEUTRAL alphabet changes nothing; the glyph is a function of depth alone",
+    "so the renderer is wrong | depth from char + identity from colour = joint EXACT; I graded one channel on the job of two"
+  ],
+  "owed": [
+    "merge connect4 and ga4444 (both diverged; backup-local-2026-10-02 on each)",
+    "run Raster(Scene) headless; sample a real PNG into the AsciiTexture.colors array"
+  ],
+  "blocked_on": [
+    "rotate the GitHub PAT that was inline in three explore/* git remotes"
+  ],
+  "known_failures": [
+    "I generalised from 10 greps to 136 code hits (BattenSpline) - never generalise from a sample I did not complete",
+    "I trusted a background task's 'succeeded' and a git add's 'success' - count on disk, after the operation, every time"
+  ],
+  "env_delta": {
+    "have": [],
+    "lack": [],
+    "traps": []
+  },
+  "next_question": null
+}
+// WARN: last_measured is set but its_provenance is null -- FILL IT IN BY HAND
