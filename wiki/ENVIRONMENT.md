@@ -33,9 +33,14 @@ HOME=/tmp XDG_CACHE_HOME=/tmp XDG_CONFIG_HOME=/tmp XDG_DATA_HOME=/tmp TMPDIR=/tm
 
 ## What is present, and what is not
 
+> **Verified 2026-10-02. Re-verify before trusting this table** — it was wrong
+> within hours, and an index that lists strengths *and* weaknesses is still wrong
+> if the weakness list is stale.
+
 | have | do not have |
 |---|---|
 | `dotnet 9.0.316` | `mono`, `msbuild`, `csc` |
+| **`gcc` / `cc` 12.2.0** | `clang`, `tcc` |
 | `python3`, `git`, `curl` | `cargo` / `rustc` — Rust findings are artifact-verified, not execution-verified |
 | `GITHUB_TOKEN`, `TYPESAFEAI_KEY` | a working GPU (`requestAdapter()` → null) |
 | network | `mcode-tools` (`invalid signature`), ElevenLabs (zero credits) |
@@ -50,6 +55,22 @@ HOME=/tmp XDG_CACHE_HOME=/tmp XDG_CONFIG_HOME=/tmp XDG_DATA_HOME=/tmp TMPDIR=/tm
   or the git-tree API.
 - A 503 or TLS EOF from TypeSafe is **transport failure, not schema evidence.**
 - **Push support can hard-block on secrets.** Describe token shapes; don't paste.
+
+## The one I got wrong, and the reason this warning is at the top
+
+**I wrote "no C toolchain" into this file without checking, and `gcc 12.2.0` was
+in the sandbox the whole time.** It built the connect4 solver, passed its
+selftest, and walked 6,711,208 states proving its TT key injective with 0
+collisions — all of it blocked behind a note I wrote from memory instead of from
+`command -v`.
+
+The deeper version of the same error is the rule I put in the README and then
+broke:
+
+> **Never write a count into a narrative before counting it.**
+
+A capability list is a narrative about the environment. It needs the same
+discipline as a number: **run the command, then write the line.**
 
 ## The one that nearly destroyed the night's work
 
