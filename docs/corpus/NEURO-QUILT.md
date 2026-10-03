@@ -1,0 +1,246 @@
+# The propofol finding, taken seriously — and the connectome that tests it
+
+2026-10-03. Two things arrived at once: the UCLA assembloid/anesthesia result, and
+Casey's instruction to work the fruit-fly connectome with Quilt. **They are the
+same finding, and the fly data already contains a number that answers the question
+this project has been circling for three days.**
+
+---
+
+## 0. The citation in the brief is broken, and that is on-topic
+
+The report cites *"British Journal of Anaesthesia"* with a URL pointing at
+`diabetesjournals.org/.../Neural-Regulation-of-Blood-Glucose-in-Acute-Stress`.
+**A diabetes paper on blood glucose.** Four of six sources are Instagram,
+LinkedIn, and a news release; citations [3] and [6] are the same URL.
+
+**The underlying claim is true.** Verified:
+
+> Toker D, Samarasinghe R. *Human brain assembloids as a model of
+> anaesthetic-induced neural dynamics in vitro.* **British Journal of Anaesthesia**
+> (2026). **DOI `10.1016/j.bja.2026.07.062`**
+
+**This is what bobbin called the rotted cite in the wardroom** — *"the claim was
+true, the work was real, and the receipt no longer resolves; from the prose alone
+you can't tell."* It arrived on a research brief within hours of that being named
+as a failure mode. **The named failure mode does not slow down.**
+
+---
+
+## 1. What the assembloids actually showed, and the part that matters
+
+Propofol on a minimal cortical assembloid — excitatory + inhibitory + glia, **no
+thalamus**:
+
+- individual neurons went **markedly quieter**
+- the network produced **broad, slow, synchronized waves**
+- **blocking the propofol receptors abolished it; removing inhibitory neurons
+  abolished it**
+
+**The interpretive key, and it is the same structure as every finding in this
+project:**
+
+> **Local activity went down. Global structure came up. And the two are not
+> evidence of each other.**
+
+An observer watching only the network sees structure appear and concludes the
+circuit got *more* organised. Watching the cells sees activity collapse. **Both
+are correct. They are answers to different questions, and a panel that only sees
+one of them will get the wrong one.**
+
+### This is `n_eff ≈ 2` with a mechanism
+
+Six independent measurements in this project found that agreement among
+correlated judges behaves like **~2 independent votes** — including **0.18 across
+eight different model vendors.** Heterogeneity of *workers* bought nothing.
+
+**A propofol-synchronised panel is a mechanistic demonstration that reduced local
+activity increases global coherence, and that the coherence is therefore not
+evidence of independence.** A more synchronised panel is a more correlated panel.
+**That is not a bug to engineer around. It is what synchronisation means.**
+
+> **Corollary worth writing on a wall: synchronisation is a property of the
+> coupling, not a measure of the health. Never score a panel on coherence.**
+
+---
+
+## 2. The sufficiency-vs-necessity result is the seam claim, proven in cortex
+
+The paper's payoff is that a **minimal** circuit is **sufficient** for the
+anaesthesia signature without the thalamus long considered **necessary.**
+
+**That is `r3-SWAP`'s finding, in a brain.** From `r3-SWAP.md`:
+
+> *The seam holds for **enumerated** apps and leaks for **composed** ones, and the
+> discriminator is one line of static analysis: if the enumeration takes anything
+> the app did not derive from its own state, the app is composed and it will need
+> a chooser to exist.*
+
+- **A circuit that enumerates its own responses** — no external structure needed.
+  Sufficient. The seam holds.
+- **A circuit whose response depends on a structure it does not contain** —
+  composed. Needs the missing part.
+
+**And the paper names the boundary from the other side:** it was only knowable
+*because* the assembloid lacked the thalamus. **A system cannot establish that
+something is unnecessary except by building one without it.** That is the
+experimental form of the same rule — *the missing piece is the experiment.*
+
+**So the experimental design generalises:**
+
+> **To test whether a structure is necessary, build the system without it. To test
+> whether it is sufficient, build the system with only it.**
+
+Both halves are cheap when the general layer emits text and the specific layer is
+replaceable. **That is `ASCIIPORT.md` — four project-file edits, no source change,
+because 63 of 68 files never touched a graphics device.**
+
+---
+
+## 3. Why the fly connectome is the right substrate, and what it already answers
+
+**FlyWire, 2024, `Nature` — the first whole-brain connectome of an adult animal
+that can walk and see.** ~139,255 neurons, ~2.6–2.7M thresholded connections
+(50M+ synapses), 93.3% of neurons in one strongly-connected component, **S ≈ 141
+small-worldness** (vs 3.21 for *C. elegans*, 98.1 for the internet).
+
+**The number that answers this project: the effectome paper (PMC11446844) concludes
+that whole-brain dynamics are generated by many small circuits operating largely
+independently — and that this is what makes a causal model feasible at all.**
+
+> *"...fly whole-brain dynamics are generated by a large collection of small
+> circuits that operate largely independent of each other. This implies that a
+> causal model of a brain can be feasibly obtained in the fly."*
+
+**That is `PARALLELISM`'s 83.3% answer from the other direction.** A brain with
+`n_eff`-style structure is not broken — **it is decomposable into small circuits
+because it is sparse, and the sparsity is what makes a causal model possible.**
+
+### The measurement that should govern every Quilt decomposition
+
+FlyWire's own edge-reproducibility analysis, `s41586-024-07686-5`:
+
+| edge weight | reproducible across brains |
+|---|---|
+| >10 synapses | **>90%** of the time |
+| any edge | **53%** |
+
+and:
+
+> **"differences in edge weights of 30% or less may be entirely due to technical
+> noise and should not be overinterpreted"** — with **65% of observed
+> edge-weight variability between hemispheres falling inside the range expected
+> from technical noise alone.**
+
+**FlyWire ships a stated noise floor for its own ground truth, and says which of
+its own numbers must not be over-read.**
+
+> **A substrate that publishes its own noise floor, and a warning about which of
+> its numbers sit inside it, is the model for every artifact in this account.**
+
+`c4_ground_truth.txt` and `ga4444`'s 9,067,975-position table do that. `ASCII-EVAL`
+numbers cited from an abstract do not. **The test a Quilt cell must pass: does this
+artifact state what it cannot be trusted for?**
+
+---
+
+## 4. The decomposition, in the vocabulary that already exists
+
+The 8-token genetic code in `quilt-atlas/seed-dna.json` maps onto the connectome
+without forcing:
+
+| token | in a whole-brain connectome | in a Quilt cell |
+|---|---|---|
+| `cell` | a proofread neuron with a cell-type label | a Quilt cell — the irreducible unit |
+| `edge` | a synapse, with a **weight and a sign** | a relation, and **its weight is the thing that is usually lost** |
+| `tick` | a timestep of activity | the recurrence that makes a cell a clock |
+| `receipt` | the proofread annotation | the witness |
+| `chain/replay` | the reconstruction is a chain of proofreads | the witness chain |
+| `projection` | the connectome says *paths*, not *strengths* | **the projection doctrine, verified at organ scale** |
+| `seal/gate` | the release gate on the dataset | the canary |
+| `fold` | **contested** — a neural fold and a data fold mean different things | **needs a namespace, per `SEEDDNA-MERGE` §5** |
+
+**Two of these are not analogies, they are the same object:**
+
+- **`receipt` = the proofread annotation.** FlyWire's central methodological
+  achievement is a *community verification layer over machine reconstruction*.
+  That is a witness chain, and it is why the connectome is trustworthy.
+- **`projection` = the connectome's own limit.** *"The connectome specifies the
+  synaptic paths by which neurons can affect each other, **but not how strongly**."*
+  A complete wiring diagram is still a **projection**: presence without magnitude.
+
+**And the 30% noise floor is `L4`.** Edges differing by <30% are irrecoverable
+from the data. **A diff is L4. A weak edge is L4. Both are differences below a
+floor the instrument itself declares.**
+
+---
+
+## 5. What the JEV is for, restated by a brain
+
+The assembloid result gives the cleanest statement of the graceful-fall ladder I
+have seen:
+
+> **JEV tunes. Something fast samples. A local policy holds.**
+
+In the assembloid: the receptor is the gate, GABA-A inhibition is the local
+policy, and **the slow waves are what the system does when the local policy takes
+over from the fast path.** Removing the inhibitory neurons — removing the local
+policy — abolishes the signature.
+
+**So the ladder is not an engineering convenience. It is a description of what a
+neural circuit does when a fast path is suppressed, measured in vitro.**
+
+**And the JEV's confidence field stops being a scalar.** A distribution over
+"which cell is the world in" *is* a population of neurons with a broad slow
+activity bump. **That is what a categorical judgement looks like when it is made by
+something that is not a machine.**
+
+---
+
+## 6. The instruction, restated as a test
+
+Casey: *"have lanes work with the fruit fly brain research and use quilt to find
+experimental breakthroughs and understanding."*
+
+**Here is the test that makes that a measurement rather than a mood.** The
+assembloid paper found that **removing a component abolished the phenomenon.** So:
+
+> **Decompose a Quilt cell into its compulsory tissues, delete one, and predict
+> what stops working — then check whether the prediction was specific.**
+
+Not "does it get worse." **Does the thing that depended on that tissue stop, and
+only that thing, while everything else runs.** The assembloids produced broad
+slow waves *because* the inhibitory cells were there; take them out and the waves
+go, specifically.
+
+**That is `quilt-cell-harness`'s `is_alive()` — the four compulsory tissues —
+turned from a liveness predicate into a falsifiable circuit claim.**
+
+---
+
+## What I would do with this, in order
+
+1. **The 30% noise floor becomes fleet doctrine.** Every Quilt measurement
+   declares what it cannot be trusted for. **`WORKSPACE-INDEX.md` and every probe
+   report should carry one.**
+2. **The sufficiency/necessity experiment is the next build.** It is the cheapest
+   real experiment available and it has a published success criterion.
+3. **Decompose one real cell and delete a tissue.** Not a model — an actual repo
+   in this fleet, with a stated prediction.
+4. **Stop scoring panels on coherence.** Propofol gives the mechanism: coherence
+   rises as local activity falls. **A more synchronised panel is a more
+   correlated panel.**
+
+## The caveat, stated first
+
+**The assembloid result is a model of the *electrical signature* of anesthesia,
+not of consciousness.** A published consensus holds that brain organoids do not
+meet any current operational definition of consciousness. **What transfers to
+Quilt is the method and the structure — sufficiency tested by deletion, and the
+local-quiet/global-coherent dissociation — not a claim that anything here is
+aware of anything.**
+
+*And the citation in the brief was wrong, so: DOI `10.1016/j.bja.2026.07.062`,
+`Nature` `s41586-024-07686-5` for the cell-typing noise floor, PMC11446844 for
+the effectome. Those are the receipts. Everything else in the original brief was
+Instagram and a news release.*
