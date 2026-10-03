@@ -28,8 +28,20 @@ if [ -d probe ]; then
   for p in probe/*.py; do
     [ -f "$p" ] || continue
     case "$p" in *__pycache__*) continue;; esac
-    printf '   %-34s ' "$(basename "$p")"
-    timeout 30 python3 "$p" >/dev/null 2>&1 && echo "OK" || echo "(needs args, or failed)"
+    # A check on EXIT CODE is a green badge: a probe that prints nothing and a
+    # probe that prints a correct answer look identical to `&& echo OK`.  This is
+    # the defect L9 exists to catch in fleetlint, and it was in my own bootstrap
+    # on the first playtest.  Assert on OUTPUT, and say how much of it.
+    out=$(timeout 30 python3 "$p" 2>&1)
+    rc=$?
+    lines=$(printf '%s' "$out" | grep -cv '^[[:space:]]*$')
+    if [ "$rc" -ne 0 ]; then
+      printf '   %-22s FAIL(exit %s)\n' "$(basename "$p")" "$rc"
+    elif [ "$lines" -lt 3 ]; then
+      printf '   %-22s GREEN BADGE (exit 0, %s lines)\n' "$(basename "$p")" "$lines"
+    else
+      printf '   %-22s OK  (%s lines)\n' "$(basename "$p")" "$lines"
+    fi
   done
 fi
 echo

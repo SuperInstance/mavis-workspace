@@ -8,7 +8,19 @@ field is either passed in explicitly or left as null, and null is visibly
 different from a number. This is the L9/L10 lesson from fleetlint applied to
 the most failure-prone output format there is -- prose about yourself.
 """
-import argparse, subprocess, sys, datetime, os, json
+import argparse, subprocess, sys, datetime, os, json, re
+
+def safe_url(u):
+    """Strip any inline credential before it reaches a committed artifact.
+
+    PLAYTEST CAUGHT THIS.  On a devbox the remote is
+    https://<TOKEN>@github.com/... and `git config remote.origin.url` copies that
+    whole string into the key form, which is then committed to a PUBLIC repo.
+    GitHub push protection caught it.  A tool that gathers context must never
+    be the thing that leaks the credential it gathered while doing it.
+    """
+    return re.sub(r"://[^/@]+@", "://***@", u or "")
+
 
 def sh(c, default=None):
     try: return subprocess.run(c, shell=True, capture_output=True, text=True, timeout=20).stdout.strip()
@@ -26,7 +38,7 @@ def main():
     ap.add_argument("--out")
     a = ap.parse_args()
 
-    repo = sh("git config --get remote.origin.url") or None
+    repo = safe_url(sh("git config --get remote.origin.url")) or None
     head = sh("git rev-parse --short HEAD") or None
     d = {"key_form_version": 1, "instance": a.instance,
          "born": datetime.datetime.now(datetime.timezone.utc).isoformat(timespec="seconds"),
@@ -49,7 +61,12 @@ def main():
     if not a.refuted:
         warn.append("refuted is EMPTY. If nothing is refuted, say so deliberately -- an "
                     "unstated empty list reads as 'nothing was corrected', which is false here.")
-    body = json.dumps(d, indent=2) + "\n" + "".join(f"// WARN: {w}\n" for w in warn)
+    # WARNINGS GO INSIDE THE JSON.  The first version appended them as trailing
+    # `// WARN:` lines, which made the file unparseable by json.load -- so the
+    # receiving agent got an exception instead of the context it came for.
+    # Found by the cold playtest, not by reading the code.
+    d["_warnings"] = warn
+    body = json.dumps(d, indent=2)
     if a.out:
         open(a.out, "w").write(body)
         print(f"  wrote {a.out}  ({len(body)} b)")

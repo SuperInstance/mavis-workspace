@@ -1,0 +1,30 @@
+{
+  "key_form_version": 1,
+  "instance": "playtest-agent",
+  "born": "2026-10-03T03:56:13+00:00",
+  "repo": "https://***@github.com/SuperInstance/mavis-workspace.git",
+  "head": "6136689",
+  "task": "verify whether the colour half of the ASCII results can be measured",
+  "last_measured": "@=79.7% of uniform-depth cells (real C#)",
+  "its_provenance": null,
+  "beliefs": [],
+  "refuted": [
+    "every projection is lossy | L1 colour-collapse kept 98.9%"
+  ],
+  "owed": [
+    "connect4 and ga4444 both diverged, merge owed"
+  ],
+  "blocked_on": [],
+  "known_failures": [
+    "I trusted exit codes on NFS"
+  ],
+  "env_delta": {
+    "have": [],
+    "lack": [],
+    "traps": []
+  },
+  "next_question": null,
+  "_warnings": [
+    "last_measured is set but its_provenance is null -- FILL IT IN BY HAND"
+  ]
+}
